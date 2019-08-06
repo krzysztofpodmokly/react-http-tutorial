@@ -8,14 +8,14 @@ class FullPost extends Component {
     loadedPost: null
   };
 
-  componentDidUpdate = async () => {
-    if (this.props.id) {
+  componentDidMount = async () => {
+    if (this.props.match.params.id) {
       // preventing from infinite loop
       if (
         !this.state.loadedPost ||
         (this.state.loadedPost && this.state.loadedPost.id !== this.props.id)
       ) {
-        const res = await axios.get(`/posts/${this.props.id}`);
+        const res = await axios.get(`/posts/${this.props.match.params.id}`);
         this.setState({
           loadedPost: res.data
         });
